@@ -51,10 +51,28 @@ const updateContactById = async (req, res) => {
   
 
 
+// PATCH /api/contacts/:id/favorite
+const updateStatusContact = async (req, res) => {
+  const { id } = req.params;
+  const { favorite } = req.body;
+
+  if (typeof favorite !== "boolean") {
+      throw HttpError(400, "Missing or invalid 'favorite' field");
+  }
+
+  const result = await contactsService.updateStatusContact(id, { favorite });
+
+  if (!result) {
+      throw HttpError(404, `Contact with id=${id} not found`);
+  }
+  res.json(result);
+};
+
 export default {
-    listContacts: ctrlWrapper(listContacts),
-    getContactById: ctrlWrapper(getContactById),
-    removeContact: ctrlWrapper(removeContact),
-    createContact: ctrlWrapper(createContact),
-    updateContactById: ctrlWrapper(updateContactById),
+  listContacts: ctrlWrapper(listContacts),
+  getContactById: ctrlWrapper(getContactById),
+  removeContact: ctrlWrapper(removeContact),
+  createContact: ctrlWrapper(createContact),
+  updateContactById: ctrlWrapper(updateContactById),
+  updateStatusContact: ctrlWrapper(updateStatusContact),
 };

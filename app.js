@@ -1,9 +1,16 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import "dotenv/config";
 
 import contactsRouter from "./routes/contactsRouter.js";
 
+import "./db/sequelize.js";
+
+console.log(process.env.DATABASE_DIALECT);
+
+
+// dpg-d1832mh5pdvs73bpoj2g-a.frankfurt-postgres.render.com
 const app = express();
 
 app.use(morgan("tiny"));
