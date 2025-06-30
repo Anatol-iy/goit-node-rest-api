@@ -47,3 +47,9 @@ export const logoutUser = async ({email})=> {
     await user.save();
 }
 
+export const updateUser = async (email, payload)=> {
+    const user = await findUser({email});
+    if(!user) throw HttpError(404, "User not found");
+    await user.update(payload);
+}
+

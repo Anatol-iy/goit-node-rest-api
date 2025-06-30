@@ -15,6 +15,8 @@ const app = express();
 app.use(morgan("tiny"));
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public")); // Дає змогу звертатися до файлів у папці "public" через URL (наприклад, /avatars/image.jpg)
+
 
 app.use("/api/contacts", contactsRouter);
 app.use("/api/auth", authRouter);
